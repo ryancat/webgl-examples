@@ -5,7 +5,7 @@
     "test": "lerna run test --since --include-dependents",
     "clear": "lerna run lerna:clear",
     "build": "lerna run lerna:build",
-    "version:bump": "lerna version --yes --conventional-commit --no-push"
+    "version:bump": "lerna version --yes --conventional-commits --no-push --no-git-tag-version"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
