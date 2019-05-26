@@ -6,9 +6,11 @@ A foo package with place holder codes, and a bar package depends on foo.
 
 ## Tools
 - lerna
+- typescript & babel
+- rollup
+- prettier
 - lint-staged
 - linters: commitlint, tslint
-- typescript & babel
 - mocha
 
 *<3 Happy coding <3*
