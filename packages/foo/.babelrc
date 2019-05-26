@@ -1,0 +1,7 @@
+{
+  "extends": "../../.babelrc",
+  "ignore": [
+    "*.test.js",
+    "*.test.ts"
+  ]
+}

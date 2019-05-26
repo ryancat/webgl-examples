@@ -1,0 +1,37 @@
+{
+  "name": "lerna-starter",
+  "private": true,
+  "scripts": {
+    "test": "lerna run test --since --include-dependents",
+    "clear": "lerna run lerna:clear",
+    "build": "lerna run lerna:build",
+    "version:bump": "lerna version --yes --no-push"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/preset-env": "^7.4.1",
+    "@babel/preset-typescript": "^7.3.2",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "chai": "^4.2.0",
+    "commitlint": "^7.6.1",
+    "husky": "^2.3.0",
+    "lerna": "^3.14.1",
+    "mocha": "^6.1.4",
+    "ts-node": "^8.1.1",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "bar": "file:packages/bar",
+    "foo": "file:packages/foo"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}

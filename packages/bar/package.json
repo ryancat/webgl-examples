@@ -1,0 +1,21 @@
+{
+  "name": "bar",
+  "private": true,
+  "version": "0.0.1",
+  "description": "uses foo",
+  "scripts": {
+    "test": "../../node_modules/.bin/mocha -r ts-node/register src/**/*.spec.ts",
+    "type-check": "../../node_modules/.bin/tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "npm run clear:build && npm run build:types && npm run build:js",
+    "build:types": "../../node_modules/.bin/tsc --emitDeclarationOnly",
+    "build:js": "../../node_modules/.bin/babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
+    "clear:build": "rm -rf dist",
+    "lerna:build": "npm run build",
+    "lerna:clear": "npm run clear:build"
+  },
+  "dependencies": {
+    "foo": "file:../foo"
+  },
+  "license": "MIT"
+}

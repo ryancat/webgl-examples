@@ -1,0 +1,20 @@
+{
+  "name": "foo",
+  "version": "0.0.1",
+  "description": "my awesome library",
+  "main": "dist/foo.js",
+  "types": "dist/foo.d.ts",
+  "scripts": {
+    "test": "../../node_modules/.bin/mocha -r ts-node/register src/**/*.spec.ts",
+    "clear": "rm -r dist",
+    "type-check": "../../node_modules/.bin/tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "npm run clear:build && npm run build:types && npm run build:js",
+    "build:types": "../../node_modules/.bin/tsc --emitDeclarationOnly",
+    "build:js": "../../node_modules/.bin/babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
+    "clear:build": "rm -rf dist",
+    "lerna:build": "npm run build",
+    "lerna:clear": "clear:build"
+  },
+  "license": "MIT"
+}
