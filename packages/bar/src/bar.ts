@@ -1,3 +1,3 @@
-import { add } from 'foo';
+import { add } from 'foo'
 
-export const addOneAndTwo = add(1, 2);
+export const addOneAndTwo = add(1, 2)

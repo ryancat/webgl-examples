@@ -30,6 +30,7 @@
     "rollup-plugin-node-resolve": "^5.0.0",
     "ts-node": "^8.1.1",
     "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.5"
   },
   "dependencies": {
@@ -38,12 +39,17 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
     "linters": {
-      "*.ts": ["prettier --write", "git add", "tslint"]
+      "*.ts": [
+        "prettier --write",
+        "git add",
+        "tslint"
+      ]
     }
   }
 }
