@@ -4,6 +4,7 @@
   "scripts": {
     "test": "lerna run test --since --include-dependents",
     "clear": "lerna run lerna:clear",
+    "lint": "tslint --project ./",
     "build": "lerna run lerna:build",
     "version:bump": "lerna version --yes --conventional-commits"
   },
@@ -20,7 +21,9 @@
     "commitlint": "^7.6.1",
     "husky": "^2.3.0",
     "lerna": "^3.14.1",
+    "lint-staged": "^8.1.7",
     "mocha": "^6.1.4",
+    "prettier": "^1.17.1",
     "rollup": "^1.12.3",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.0.0",
@@ -36,6 +39,11 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.ts": ["prettier --write", "git add", "tslint"]
     }
   }
 }
