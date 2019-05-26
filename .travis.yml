@@ -3,4 +3,4 @@ node_js:
   - 'node'
   - 'iojs'
 script:
-  - npm run test:ci
+  - npm run ci:test
