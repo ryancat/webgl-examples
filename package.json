@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "test": "lerna run test --since --include-dependents",
+    "ci:test": "npm run build && npm run test",
     "clear": "lerna run lerna:clear",
-    "lint": "tslint --project ./",
     "build": "lerna run lerna:build",
     "version:bump": "lerna version --yes --conventional-commits"
   },
