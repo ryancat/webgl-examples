@@ -14,7 +14,7 @@
     "build:js": "../../node_modules/.bin/babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
     "clear:build": "rm -rf dist",
     "lerna:build": "npm run build",
-    "lerna:clear": "clear:build"
+    "lerna:clear": "npm run clear:build"
   },
   "license": "MIT"
 }
