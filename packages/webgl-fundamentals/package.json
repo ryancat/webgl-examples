@@ -1,7 +1,7 @@
 {
   "name": "webgl-fundamentals",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "webgl examples from the WebGL Fundamentals online tutorial",
   "scripts": {
     "test": "../../node_modules/.bin/mocha -r ts-node/register src/**/*.spec.ts",

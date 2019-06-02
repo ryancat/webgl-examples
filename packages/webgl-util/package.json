@@ -1,6 +1,6 @@
 {
   "name": "webgl-util",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Util method that covers webgl essential pieces",
   "main": "dist/webgl-util.js",
   "types": "dist/webgl-util.d.ts",
