@@ -3,6 +3,7 @@ import path from 'path';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
+import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
 const extensions = [
@@ -14,6 +15,9 @@ const srcDir = path.resolve(__dirname, './src');
 const distDir = path.resolve(__dirname, './public');
 
 function createRollupConfig(inputFile) {
+  const extname = path.extname(inputFile);
+  const basename = path.basename(inputFile, extname);
+
   return {
     input: path.resolve(srcDir, inputFile),
 
@@ -22,6 +26,14 @@ function createRollupConfig(inputFile) {
     external: [],
 
     plugins: [
+      // Copy html files to public folder
+      copy({
+        targets: [
+          path.resolve(srcDir, `${basename}.html`)
+        ],
+        outputFolder: distDir
+      }),
+      
       // Allows node_modules resolution
       resolve({ extensions }),
 
@@ -33,10 +45,10 @@ function createRollupConfig(inputFile) {
     ],
 
     output: [{
-      file: path.resolve(distDir, `${path.basename(inputFile)}.esm.bundle.js`),
+      file: path.resolve(distDir, `${basename}.esm.bundle.js`),
       format: 'es',
     }, {
-      file: path.resolve(distDir, `${path.basename(inputFile)}.bundle.js`),
+      file: path.resolve(distDir, `${basename}.bundle.js`),
       format: 'iife',
       name,
 
