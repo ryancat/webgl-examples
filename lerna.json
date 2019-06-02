@@ -2,6 +2,10 @@
   "packages": [
     "packages/*"
   ],
-  "conventionalCommit": true,
+  "command": {
+    "version": {
+      "message": "chore(version): bump versions"
+    }
+  },
   "version": "independent"
 }
