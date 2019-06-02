@@ -1,0 +1,22 @@
+{
+  "name": "bar",
+  "private": true,
+  "version": "0.0.1",
+  "description": "uses foo",
+  "scripts": {
+    "test": "../../node_modules/.bin/mocha -r ts-node/register src/**/*.spec.ts",
+    "type-check": "../../node_modules/.bin/tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "npm run clear:build && npm run build:types && npm run build:js && npm run build:bundle",
+    "build:types": "../../node_modules/.bin/tsc --emitDeclarationOnly",
+    "build:js": "../../node_modules/.bin/babel src --out-dir public --extensions \".ts,.tsx\" --source-maps inline",
+    "build:bundle": "../../node_modules/.bin/rollup -c",
+    "clear:build": "rm -rf public",
+    "lerna:build": "npm run build",
+    "lerna:clear": "npm run clear:build"
+  },
+  "dependencies": {
+    "webgl-util": "file:../webgl-util"
+  },
+  "license": "MIT"
+}
