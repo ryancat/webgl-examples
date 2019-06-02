@@ -1,16 +1,7 @@
-## lerna-starter
-Create your next lerna monorepo faster!
+## webgl-examples
+I create this repo to track my learning on webgl related topics. This monorepo also publish the webgl-util package to npm.
 
-## What's inside
-A foo package with place holder codes, and a bar package depends on foo.
+Checkout the examples and live demos!
 
-## Tools
-- lerna
-- typescript & babel
-- rollup
-- prettier
-- lint-staged
-- linters: commitlint, tslint
-- mocha
-
-*<3 Happy coding <3*
+## Resources
+- [WebGL Fundamentals](https://webglfundamentals.org)

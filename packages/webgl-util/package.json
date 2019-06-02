@@ -1,12 +1,11 @@
 {
-  "name": "foo",
+  "name": "webgl-util",
   "version": "0.0.1",
-  "description": "my awesome library",
-  "main": "dist/foo.js",
-  "types": "dist/foo.d.ts",
+  "description": "Util method that covers webgl essential pieces",
+  "main": "dist/webgl-util.js",
+  "types": "dist/webgl-util.d.ts",
   "scripts": {
     "test": "../../node_modules/.bin/mocha -r ts-node/register src/**/*.spec.ts",
-    "clear": "rm -r dist",
     "type-check": "../../node_modules/.bin/tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
     "build": "npm run clear:build && npm run build:types && npm run build:js",

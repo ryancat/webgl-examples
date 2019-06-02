@@ -1,8 +1,8 @@
 {
-  "name": "bar",
+  "name": "webgl-fundamentals",
   "private": true,
   "version": "0.0.1",
-  "description": "uses foo",
+  "description": "webgl examples from the WebGL Fundamentals online tutorial",
   "scripts": {
     "test": "../../node_modules/.bin/mocha -r ts-node/register src/**/*.spec.ts",
     "type-check": "../../node_modules/.bin/tsc --noEmit",

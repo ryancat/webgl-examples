@@ -1,5 +1,5 @@
 {
-  "name": "lerna-starter",
+  "name": "webgl-examples",
   "private": true,
   "scripts": {
     "test": "lerna run test --since --include-dependents",
@@ -27,6 +27,7 @@
     "rollup": "^1.12.3",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-copy": "^2.0.1",
     "rollup-plugin-node-resolve": "^5.0.0",
     "ts-node": "^8.1.1",
     "tslint": "^5.16.0",
@@ -34,8 +35,8 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
-    "bar": "file:packages/bar",
-    "foo": "file:packages/foo"
+    "webgl-util": "file:packages/webgl-util",
+    "webgl-fundamentals": "file:packages/webgl-fundamentals"
   },
   "husky": {
     "hooks": {
