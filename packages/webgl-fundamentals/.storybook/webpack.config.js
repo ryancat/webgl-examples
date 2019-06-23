@@ -18,10 +18,14 @@ module.exports = async ({ config }) => {
     test: /\.js$/,
     loader: 'source-map-loader'
   }, {
-    test: /\.(ts|tsx)$/,
-    loader: 'ts-loader',
+    test: /\.(js|ts)x?$/,
+    loader: 'babel-loader',
     exclude: /node_modules/,
     enforce: 'post',
+  }, {
+    test: /\.glsl$/,
+    loader: 'raw-loader',
+    exclude: /node_modules/
   });
 
   // Do not minimize for internal docs
