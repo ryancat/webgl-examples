@@ -1,15 +1,18 @@
 export * from './ShaderProgram'
 
 /**
- * Detect webgl support for current environment.
+ * Get the webgl context object. Will also
+ * detect webgl support for current environment.
  * Will throw error if failed.
  */
-export function checkWebglSupport() {
-  const gl = document.createElement('canvas').getContext('webgl')
+export function getWebglContext(canvas: HTMLCanvasElement) {
+  const gl = canvas.getContext('webgl')
 
   if (!gl) {
     throw new Error('webgl is not supported!')
   }
+
+  return gl
 }
 
 export function resizeCanvas(

@@ -1,11 +1,29 @@
 import defaultFragmentShaderSource from './shaders/basic.fragment.glsl'
 import defaultVertexShaderSource from './shaders/basic.vertex.glsl'
 
+// The default storage qualifiers are coming fro the basic
+// vertex and fragment shaders
+const DEFAULT_ATTRIBUTES = ['aVertexPosition', 'aTextureCoord', 'aVertexNormal']
+const DEFAULT_UNIFORMS = [
+  'uProjectionMatrix',
+  'uModelViewMatrix',
+  'uSampler',
+  'uUseLighting',
+  'uAmbientColor',
+  'uDirectionalColor',
+  'uLightingDirection',
+  'uNMatrix',
+  'uIsBlend',
+  'uAlpha',
+]
+
 export class ShaderProgram {
   gl: WebGLRenderingContext
   vertexShaderSource: string
   fragmentShaderSource: string
-  program: WebGLProgram | null
+  attributeLocationMap: { [key: string]: number } = {}
+  uniformLocationMap: { [key: string]: WebGLUniformLocation } = {}
+  program: WebGLProgram
 
   constructor(
     gl: WebGLRenderingContext,
@@ -18,10 +36,50 @@ export class ShaderProgram {
     this.fragmentShaderSource = fragmentShaderSource
 
     // Create program
-    this.program = this.createProgram()
+    this.program = this.initProgram()
+
+    // Enable program for default shaders
+    // From this stackoverflow thread https://stackoverflow.com/questions/36288389/when-should-i-enable-disable-vertex-position-attributes-in-webgl-opengl
+    // I think we should always call this after init is done, and not necessarily
+    // to disable them in webgl before draw when multiple shader programs are available.
+    if (
+      this.vertexShaderSource === defaultVertexShaderSource &&
+      this.fragmentShaderSource === defaultFragmentShaderSource
+    ) {
+      this.enableProgram(DEFAULT_ATTRIBUTES, DEFAULT_UNIFORMS)
+    }
   }
 
-  createProgram() {
+  enableProgram(attributeArr: string[] = [], uniformArr: string[] = []) {
+    // Tell our gl context to use the created program
+    this.gl.useProgram(this.program)
+
+    attributeArr.forEach(attribute => {
+      const attributeLocation = this.gl.getAttribLocation(
+        this.program,
+        attribute
+      )
+      this.attributeLocationMap[attribute] = attributeLocation
+      this.gl.enableVertexAttribArray(attributeLocation)
+    })
+
+    uniformArr.forEach(uniform => {
+      const uniformLocation = this.gl.getUniformLocation(this.program, uniform)
+      if (uniformLocation === null) {
+        throw new Error(`Cannot find uniform location for: ${uniform}`)
+      }
+
+      this.uniformLocationMap[uniform] = uniformLocation
+    })
+  }
+
+  enableAttribute(attributeName: string) {
+    this.gl.enableVertexAttribArray(
+      this.gl.getAttribLocation(this.program, attributeName)
+    )
+  }
+
+  private initProgram() {
     // Create blank shader program
     const program = this.gl.createProgram()
     if (program === null) {
@@ -48,7 +106,7 @@ export class ShaderProgram {
     return program
   }
 
-  createVertexShader() {
+  private createVertexShader() {
     // Create blank shader
     const shader = this.gl.createShader(this.gl.VERTEX_SHADER)
     if (shader === null) {
@@ -64,7 +122,7 @@ export class ShaderProgram {
     return shader
   }
 
-  createFragmentShader() {
+  private createFragmentShader() {
     // Create blank shader
     const shader = this.gl.createShader(this.gl.FRAGMENT_SHADER)
     if (shader === null) {
@@ -80,7 +138,7 @@ export class ShaderProgram {
     return shader
   }
 
-  compileShader(shader: WebGLShader) {
+  private compileShader(shader: WebGLShader) {
     this.gl.compileShader(shader)
 
     if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
