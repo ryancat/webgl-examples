@@ -1,3 +1,6 @@
+// TODO: lack of ts support for @types/storybook__addon-centered for html framework
+// @ts-ignore
+import centered from '@storybook/addon-centered/html'
 import { storiesOf } from '@storybook/html'
 import { getWebglContext, resizeCanvas, ShaderProgram } from 'webgl-util'
 
@@ -25,6 +28,7 @@ const fragmentShaderSource = `
 `
 
 storiesOf('WebGL Fundamentals', module)
+  .addDecorator(centered)
   // This is a bug, storybook html should accept HTMLElement
   // See https://github.com/DefinitelyTyped/DefinitelyTyped/blame/9ce4bbcff838695cba5bfc37e8d934975e50f26f/types/storybook__html/index.d.ts#L9
   // @ts-ignore
@@ -61,7 +65,7 @@ storiesOf('WebGL Fundamentals', module)
     // Now we have all data send over to buffer and bind to gl.ARRAY_BUFFER.
     // We are going to draw them.
     // Resize canvas
-    resizeCanvas(canvas, 300, 300)
+    resizeCanvas(canvas, 400, 400)
 
     // Map clip space with screen space
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)

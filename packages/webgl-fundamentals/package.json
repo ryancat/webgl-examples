@@ -11,6 +11,12 @@
     "lerna:clear": "npm run clear:build"
   },
   "dependencies": {
+    "@storybook/addon-centered": "^5.0.6",
+    "@storybook/addon-notes": "^5.0.6",
+    "@storybook/addon-storysource": "^5.0.6",
+    "@storybook/addon-viewport": "^5.0.6",
+    "@storybook/addons": "^5.0.6",
+    "@storybook/html": "^5.0.6",
     "webgl-util": "file:../webgl-util"
   },
   "license": "MIT"

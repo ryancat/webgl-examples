@@ -14,9 +14,10 @@ module.exports = async ({ config }) => {
       }
     }],
     enforce: 'pre',
-  }, {
-    test: /\.js$/,
-    loader: 'source-map-loader'
+  // TODO: The source-map-loader will cause core-js build issue start recently
+  // }, {
+  //   test: /\.js$/,
+  //   loader: 'source-map-loader'
   }, {
     test: /\.(js|ts)x?$/,
     loader: 'babel-loader',
