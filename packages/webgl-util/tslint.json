@@ -2,6 +2,7 @@
   "extends": "../../tslint.json",
   "rules": {
     "member-access": [true, "no-public"],
-    "no-console": [true, "log", "error"]
+    "no-console": [true, "log", "error"],
+    "interface-name": [true, "never-prefix"]
   }
 }

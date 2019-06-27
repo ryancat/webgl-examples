@@ -2,7 +2,7 @@
 // @ts-ignore
 import centered from '@storybook/addon-centered/html'
 import { storiesOf } from '@storybook/html'
-import { getWebglContext, resizeCanvas, ShaderProgram } from 'webgl-util'
+import { getWebglContext, resizeCanvas, ShaderProgram, verticesInBuffer, verticesOutBuffer } from 'webgl-util'
 
 const vertexShaderSource = `
   // an attribute will receive data from a buffer
@@ -55,13 +55,15 @@ storiesOf('WebGL Fundamentals', module)
     program.enableProgram(['a_position'])
 
     // Now we need to create and bind buffers with data
-    const positionBuffer = gl.createBuffer()
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
-
-    const positions = [0, 0, 0, 0.5, 0.7, 0]
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW)
+    const positionBuffer = verticesInBuffer(gl, [
+      0, 0,
+      0, 0.5,
+      0.7, 0
+    ])
 
     /*** Draw step ***/
+    // Prepare to draw
+    
     // Now we have all data send over to buffer and bind to gl.ARRAY_BUFFER.
     // We are going to draw them.
     // Resize canvas
@@ -70,32 +72,19 @@ storiesOf('WebGL Fundamentals', module)
     // Map clip space with screen space
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
 
+    // Tell the attribute how to get data out of positionBuffer (from gl.ARRAY_BUFFER)
+    verticesOutBuffer(gl, program, positionBuffer, 'a_position')
+
+    // Drawing
+
     // Clear canvas
     gl.clearColor(0, 0, 0, 0)
     gl.clear(gl.COLOR_BUFFER_BIT)
 
-    // Bind position buffer
-    // Q: Why I need to bind buffer the second time?
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
-
-    // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
-    const size = 2 // 2 components per iteration
-    const type = gl.FLOAT // the data is 32bit floats
-    const normalize = false // don't normalize the data
-    const stride = 0 // 0 = move forward size * sizeof(type) each iteration to get the next position
-    const offset = 0 // start at the beginning of the buffer
-    gl.vertexAttribPointer(
-      program.attributeLocationMap['a_position'],
-      size,
-      type,
-      normalize,
-      stride,
-      offset
-    )
-
     // Execute program
     const primitiveType = gl.TRIANGLES // Draw triangle primitive type
     const count = 3 // Draw three times, each time a vertex
+    const offset = 0 // draw array from zero offset
     gl.drawArrays(primitiveType, offset, count)
 
     return canvas
