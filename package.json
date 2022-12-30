@@ -25,7 +25,7 @@
     "husky": "^2.3.0",
     "lerna": "^3.14.1",
     "lint-staged": "^8.1.7",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.17.1",
     "raw-loader": "^3.0.0",
